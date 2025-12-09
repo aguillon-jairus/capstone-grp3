@@ -8,21 +8,24 @@
     font-style: normal;
 }
 
-body {
+html, body {
+    height: 100%;
     margin: 0;
-    font-family: "CocoGothic", sans-serif;
-    color: white;
 }
 
-header {
-    position: relative;
-    z-index: 2;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: white;
+    font-family: "CocoGothic", sans-serif;
 }
 
 nav {
+    flex: 0 0 auto;
+    display: flex;
     background: #0b669c;
     padding: 1rem 2rem;
-    display: flex;
     align-items: center;
     gap: 2rem;
 }
@@ -46,32 +49,26 @@ nav a {
     background: #f4b940;
 }
 
-.cta {
-    height: 100vh;
+.hero {
+    flex: 1 0 0;
+    display: flex;
+    min-height: 100vh;
     background: url("/assets/images/landing_bg.jpg") center/cover no-repeat;
     position: relative;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 0 1rem;
 }
 
-.cta::before {
+.hero::before {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(9, 55, 80, 0.7);
 }
 
-.cta > * {
-    position: relative;
-    max-width: 800px;
-}
-
 .content-box {
-    max-width: 700px;
+    position: relative;
+    max-width: 500vw;
     margin: 0 auto;
     padding: 0 1rem;
     text-align: center;
@@ -106,7 +103,7 @@ h1::after {
         0px 3px 0px black;
 }
 
-.cta button {
+.hero button {
     background: #f4b940;
     color: #6b4f2a;
     padding: 0.5rem 2rem;
