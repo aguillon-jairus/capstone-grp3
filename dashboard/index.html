@@ -1,11 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <a>Hello World!</a>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard</title>
+
+        <link
+            rel="stylesheet"
+            href="assets/css/landing.css?v={{ site.github.build_revision }}"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css"
+        />
+    </head>
+    <body>
+        <div id="map"></div>
+
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            const map = L.map("map").setView([0, 0], 2);
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                maxZoom: 18
+            }).addTo(map);
+            
+            const geojsonURL =
+                "https://drive.google.com/uc?export=download&id=1PScFOB6xvh8fXYy_OYQX2cXvBU9mpUWU";
+            
+            fetch(geojsonURL)
+                .then(r => r.json())
+                .then(data => {
+                    const layer = L.geoJSON(data).addTo(map);
+                    map.fitBounds(layer.getBounds());
+                })
+                .catch(err => console.error("Error loading GeoJSON:", err));
+        </script>
+    </body>
 </html>
